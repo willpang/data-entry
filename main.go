@@ -20,6 +20,7 @@ func main() {
 	r.POST("/users", controllers.CreateUser)
 	r.GET("/users/:id", controllers.FindUser)
 	r.PATCH("/users/:id", controllers.UpdateUser)
+	r.DELETE("/users/:id", controllers.DeleteUser)
 
 	r.Run()
 }
