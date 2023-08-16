@@ -1,0 +1,17 @@
+POST http://localhost:8080/users HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Sample",
+    "address": "Test Street",
+    "email": "test@gmail.com",
+    "phoneNumber": "081234567890"
+}
+
+###
+
+GET http://localhost:8080/users HTTP/1.1
+
+###
+
+GET http://localhost:8080/users/2 HTTP/1.1

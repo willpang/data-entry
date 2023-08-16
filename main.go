@@ -18,6 +18,7 @@ func main() {
 	})
 	r.GET("/users", controllers.FindUsers)
 	r.POST("/users", controllers.CreateUser)
+	r.GET("/users/:id", controllers.FindUser)
 
 	r.Run()
 }
