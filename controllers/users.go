@@ -45,3 +45,25 @@ func FindUser(c *gin.Context) { // Get model if exist
 
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
+
+// PATCH /users/:id
+// Update a user
+func UpdateUser(c *gin.Context) {
+	// Get model if exist
+	var user models.User
+	if err := models.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+		return
+	}
+
+	// Validate input
+	var input models.UpdateUserInput
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	models.DB.Model(&user).Updates(input)
+
+	c.JSON(http.StatusOK, gin.H{"data": user})
+}
