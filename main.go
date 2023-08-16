@@ -17,6 +17,7 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"data": "hello world"})
 	})
 	r.GET("/users", controllers.FindUsers)
+	r.POST("/users", controllers.CreateUser)
 
 	r.Run()
 }
