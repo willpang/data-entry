@@ -1,0 +1,23 @@
+{{ define "users/users.tmpl" }}
+<html>
+    <head>
+        <title>{{ .Title }}</title>
+
+        {{ template "static/bootstrap-css.tmpl" }}
+    </head>
+    {{ template "globals/header.tmpl" .}}
+    <body>
+        <div>
+            {{ range .UserData }}
+                Name: {{ .Name }}<br/>
+                Address: {{ .Address }}<br/>
+                Email: {{ .Email }}<br/>
+                Phone Number: {{ .PhoneNumber }}<br/>
+            {{ end }}
+        </div>
+        {{ template "globals/footer.tmpl" .}}
+
+        {{ template "static/bootstrap-js.tmpl" }}
+    </body>
+</html>
+{{ end }}

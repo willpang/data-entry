@@ -8,16 +8,17 @@ import (
 
 func main() {
 	r := gin.Default()
-	r.LoadHTMLGlob("templates/*.tmpl")
+	r.LoadHTMLGlob("templates/**/*.tmpl")
 
 	models.ConnectDatabase()
 
 	r.GET("/", controllers.LoadIndexTemplate)
-	r.GET("/users", controllers.FindUsers)
-	r.POST("/users", controllers.CreateUser)
-	r.GET("/users/:id", controllers.FindUser)
-	r.PATCH("/users/:id", controllers.UpdateUser)
-	r.DELETE("/users/:id", controllers.DeleteUser)
+	r.GET("/users", controllers.LoadUserTemplate)
+	r.GET("/user", controllers.FindUsers)
+	r.POST("/user", controllers.CreateUser)
+	r.GET("/user/:id", controllers.FindUser)
+	r.PATCH("/user/:id", controllers.UpdateUser)
+	r.DELETE("/user/:id", controllers.DeleteUser)
 
 	r.Run()
 }
