@@ -1,8 +1,10 @@
-package models
+package sqlite
 
 import (
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+
+	"github.com/willpang/data-entry/models"
 )
 
 var DB *gorm.DB
@@ -15,7 +17,7 @@ func ConnectDatabase() {
 		panic("Failed to connect to database!")
 	}
 
-	err = database.AutoMigrate(&User{})
+	err = database.AutoMigrate(&models.User{})
 	if err != nil {
 		return
 	}
