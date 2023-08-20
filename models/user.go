@@ -8,14 +8,15 @@ type User struct {
 	PhoneNumber string `json:"phoneNumber"`
 }
 
-type CreateUserInput struct {
+type UserCreateRequest struct {
 	Name        string `json:"name" binding:"required"`
 	Address     string `json:"address" binding:"required"`
 	Email       string `json:"email"`
 	PhoneNumber string `json:"phoneNumber"`
 }
 
-type UpdateUserInput struct {
+type UserUpdateRequest struct {
+	ID          uint   `json:"id"`
 	Name        string `json:"name"`
 	Address     string `json:"address"`
 	Email       string `json:"email"`

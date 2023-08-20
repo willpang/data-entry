@@ -1,15 +1,12 @@
 package sqlite
 
 import (
+	"github.com/willpang/data-entry/models"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-
-	"github.com/willpang/data-entry/models"
 )
 
-var DB *gorm.DB
-
-func ConnectDatabase() {
+func ConnectDatabase() *gorm.DB {
 
 	database, err := gorm.Open(sqlite.Open("database.db"), &gorm.Config{})
 
@@ -19,8 +16,8 @@ func ConnectDatabase() {
 
 	err = database.AutoMigrate(&models.User{})
 	if err != nil {
-		return
+		panic("Failed to migrate User database!")
 	}
 
-	DB = database
+	return database
 }

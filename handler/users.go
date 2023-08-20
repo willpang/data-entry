@@ -4,13 +4,12 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/willpang/data-entry/datastore/sqlite"
 	"github.com/willpang/data-entry/models"
 )
 
-func LoadUserTemplate(c *gin.Context) {
+func (h Handler) LoadUserTemplate(ctx *gin.Context) {
 
-	c.HTML(http.StatusOK, "users/users.tmpl", gin.H{
+	ctx.HTML(http.StatusOK, "users/users.tmpl", gin.H{
 		"Title": "Users Page",
 		"UserData": []models.User{
 			{
@@ -31,76 +30,76 @@ func LoadUserTemplate(c *gin.Context) {
 
 // GET /users
 // Get all users
-func FindUsers(c *gin.Context) {
+func (h Handler) FindUsers(ctx *gin.Context) {
 	var users []models.User
-	sqlite.DB.Find(&users)
+	h.DB.Find(&users)
 
-	c.JSON(http.StatusOK, gin.H{"data": users})
+	ctx.JSON(http.StatusOK, gin.H{"data": users})
 }
 
 // POST /users
 // Create new user
-func CreateUser(c *gin.Context) {
-	// Validate input
-	var input models.CreateUserInput
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+func (h Handler) CreateUser(ctx *gin.Context) {
+	// Validate request
+	var req models.UserCreateRequest
+	if err := ctx.ShouldBindJSON(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	// Create user
-	user := models.User{Name: input.Name, Address: input.Address, Email: input.Email, PhoneNumber: input.PhoneNumber}
-	sqlite.DB.Create(&user)
+	user := models.User{Name: req.Name, Address: req.Address, Email: req.Email, PhoneNumber: req.PhoneNumber}
+	h.DB.Create(&user)
 
-	c.JSON(http.StatusOK, gin.H{"data": user})
+	ctx.JSON(http.StatusOK, gin.H{"data": user})
 }
 
 // GET /users/:id
 // Find a user
-func FindUser(c *gin.Context) { // Get model if exist
+func (h Handler) FindUser(ctx *gin.Context) { // Get model if exist
 	var user models.User
 
-	if err := sqlite.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+	if err := h.DB.Where("id = ?", ctx.Param("id")).First(&user).Error; err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"data": user})
+	ctx.JSON(http.StatusOK, gin.H{"data": user})
 }
 
 // PATCH /users/:id
 // Update a user
-func UpdateUser(c *gin.Context) {
+func (h Handler) UpdateUser(ctx *gin.Context) {
 	// Get model if exist
 	var user models.User
-	if err := sqlite.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+	if err := h.DB.Where("id = ?", ctx.Param("id")).First(&user).Error; err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
 
-	// Validate input
-	var input models.UpdateUserInput
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	// Validate request
+	var req models.UserUpdateRequest
+	if err := ctx.ShouldBindJSON(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	sqlite.DB.Model(&user).Updates(input)
+	h.DB.Model(&user).Updates(req)
 
-	c.JSON(http.StatusOK, gin.H{"data": user})
+	ctx.JSON(http.StatusOK, gin.H{"data": user})
 }
 
 // DELETE /users/:id
 // Delete a user
-func DeleteUser(c *gin.Context) {
+func (h Handler) DeleteUser(ctx *gin.Context) {
 	// Get model if exist
 	var user models.User
-	if err := sqlite.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+	if err := h.DB.Where("id = ?", ctx.Param("id")).First(&user).Error; err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
 
-	sqlite.DB.Delete(&user)
+	h.DB.Delete(&user)
 
-	c.JSON(http.StatusOK, gin.H{"data": true})
+	ctx.JSON(http.StatusOK, gin.H{"data": true})
 }

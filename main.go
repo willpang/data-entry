@@ -10,15 +10,19 @@ func main() {
 	r := gin.Default()
 	r.LoadHTMLGlob("templates/**/*.tmpl")
 
-	sqlite.ConnectDatabase()
+	db := sqlite.ConnectDatabase()
 
-	r.GET("/", handler.LoadIndexTemplate)
-	r.GET("/users", handler.LoadUserTemplate)
-	r.GET("/user", handler.FindUsers)
-	r.POST("/user", handler.CreateUser)
-	r.GET("/user/:id", handler.FindUser)
-	r.PATCH("/user/:id", handler.UpdateUser)
-	r.DELETE("/user/:id", handler.DeleteUser)
+	h := &handler.Handler{
+		DB: db,
+	}
+
+	r.GET("/", h.LoadIndexTemplate)
+	r.GET("/users", h.LoadUserTemplate)
+	r.GET("/user", h.FindUsers)
+	r.POST("/user", h.CreateUser)
+	r.GET("/user/:id", h.FindUser)
+	r.PATCH("/user/:id", h.UpdateUser)
+	r.DELETE("/user/:id", h.DeleteUser)
 
 	r.Run()
 }
