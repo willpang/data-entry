@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/willpang/data-entry/datastore/sqlite"
-	"github.com/willpang/data-entry/handler"
+	"github.com/willpang/data-entry/datastores/sqlite"
+	"github.com/willpang/data-entry/handlers"
 )
 
 func main() {
@@ -12,8 +12,8 @@ func main() {
 
 	db := sqlite.ConnectDatabase()
 
-	h := &handler.Handler{
-		DB: db,
+	h := &handlers.Handler{
+		UserDatastore: sqlite.UserDatastore{DB: db},
 	}
 
 	r.GET("/", h.LoadIndexTemplate)

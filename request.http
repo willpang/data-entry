@@ -14,17 +14,17 @@ GET http://localhost:8080/user HTTP/1.1
 
 ###
 
-GET http://localhost:8080/user/3 HTTP/1.1
+GET http://localhost:8080/user/2 HTTP/1.1
 
 ###
 
 PATCH http://localhost:8080/user/2 HTTP/1.1
 
 {
-    "name": "Sample",
+    "name": "Sample-Test",
     "email": "test@gmail.com"
 }
 
 ###
 
-DELETE http://localhost:8080/user/3 HTTP/1.1
+DELETE http://localhost:8080/user/7 HTTP/1.1
