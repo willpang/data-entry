@@ -2,8 +2,13 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/willpang/data-entry/datastores/services"
 	"github.com/willpang/data-entry/datastores/sqlite"
 	"github.com/willpang/data-entry/handlers"
+)
+
+var (
+	_ services.UserDatastore = &sqlite.UserDatastore{}
 )
 
 func main() {
