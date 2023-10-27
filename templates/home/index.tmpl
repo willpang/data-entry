@@ -1,18 +1,16 @@
 {{ define "home/index.tmpl" }}
 <html>
-    <head>
-        <title>{{ .Title }}</title>
-
-        {{ template "static/bootstrap-css.tmpl" }}
-    </head>
     {{ template "globals/header.tmpl" .}}
     <body>
-        <div>
-            <h1>{{ .Message }}</h1>
-        </div>
-        {{ template "globals/footer.tmpl" .}}
+        {{ template "globals/navbar.tmpl" .}}
 
-        {{ template "static/bootstrap-js.tmpl" }}
+        <div class="container">
+            <div>
+                <h1>{{ .Message }}</h1>
+            </div>
+        </div>
+
+        {{ template "globals/footer.tmpl" .}}
     </body>
 </html>
 {{ end }}

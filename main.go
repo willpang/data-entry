@@ -29,5 +29,8 @@ func main() {
 	r.PATCH("/user/:id", h.UpdateUser)
 	r.DELETE("/user/:id", h.DeleteUser)
 
+	// Handle CSS, JS, and Image
+	r.Static("/assets", "./assets/")
+
 	r.Run()
 }
