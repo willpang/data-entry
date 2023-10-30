@@ -10,11 +10,12 @@
             <table id="dataTable" class="table">
                 <thead class="table-dark">
                     <tr>
-                        <th onclick="sortTable(0)">ID</th>
-                        <th onclick="sortTable(1)">Name</th>
-                        <th onclick="sortTable(2)">Address</th>
-                        <th onclick="sortTable(3)">Email</th>
-                        <th onclick="sortTable(4)">Phone Number</th>
+                        <th onclick="sortTable(0,'int')">ID</th>
+                        <th onclick="sortTable(1,'string')">Nama</th>
+                        <th onclick="sortTable(2,'string')">Alamat</th>
+                        <th onclick="sortTable(3,'string')">Email</th>
+                        <th onclick="sortTable(4,'string')">Nomor Telepon</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,6 +26,11 @@
                         <td>{{ .Address }}</td>
                         <td>{{ .Email }}</td>
                         <td>{{ .PhoneNumber }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary " onclick=""><img src="/assets/images/loupe.png" width="20" height="20" style="filter: invert(100%);" /></button>
+                            <button type="button" class="btn btn-success btn-80-bright" onclick=""><img src="/assets/images/edit.png" width="20" height="20" style="filter: invert(100%);" /></button>
+                            <button type="button" class="btn btn-danger btn-80-bright" onclick="deleteUser({{ .ID }},{{ .Name }})"><img src="/assets/images/recycle-bin.png" width="20" height="20" style="filter: invert(100%);" /></button>
+                        </td>
                     </tr>
                     {{ end }}
                 </tbody>

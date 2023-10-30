@@ -8,7 +8,7 @@ import (
 
 func (h Handler) LoadIndexTemplate(ctx *gin.Context) {
 	ctx.HTML(http.StatusOK, "home/index.tmpl", gin.H{
-		"Title":   "Home",
+		"Title":   "Beranda",
 		"Message": "Hello, World!",
 	})
 }

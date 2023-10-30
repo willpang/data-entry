@@ -1,4 +1,4 @@
-function sortTable(n) {
+function sortTable(n, data_type) {
   var table,
     rows,
     switching,
@@ -30,16 +30,56 @@ function sortTable(n) {
       /* Check if the two rows should switch place,
       based on the direction, asc or desc: */
       if (dir == "asc") {
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          // If so, mark as a switch and break the loop:
-          shouldSwitch = true;
-          break;
+        if (data_type == "int") {
+          if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        } else if (data_type == "date") {
+          if (Date.parse(x.innerHTML) > Date.parse(y.innerHTML)) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        } else if (data_type == "float") {
+          if (parseFloat(x.innerHTML) > parseFloat(y.innerHTML)) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        } else if (data_type == "string") {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
         }
       } else if (dir == "desc") {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-          // If so, mark as a switch and break the loop:
-          shouldSwitch = true;
-          break;
+        if (data_type == "int") {
+          if (parseInt(x.innerHTML) < parseInt(y.innerHTML)) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        } else if (data_type == "date") {
+          if (Date.parse(x.innerHTML) < Date.parse(y.innerHTML)) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        } else if (data_type == "float") {
+          if (parseFloat(x.innerHTML) < parseFloat(y.innerHTML)) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        } else if (data_type == "string") {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
         }
       }
     }
@@ -85,5 +125,29 @@ function searchTable() {
         }
       }
     }
+  }
+}
+
+function deleteUser(id, name) {
+  var r = confirm("Are you sure you want to delete this user?");
+  if (r == true) {
+    fetch("/user/" + id, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Successfully deleted user " + name + " with id " + id + "...");
+          location.reload(); // Reload the page after the user is deleted
+        } else {
+          alert("Failed to delete user " + name + " with id " + id + "!");
+        }
+      })
+      .catch((error) => {
+        alert("Failed to delete user " + name + ": " + error.message);
+      });
+
+    return true;
+  } else {
+    return false;
   }
 }

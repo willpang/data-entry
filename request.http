@@ -2,10 +2,10 @@ POST http://localhost:8080/user HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Sample",
-    "address": "Test Street",
-    "email": "test@gmail.com",
-    "phoneNumber": "081234567890"
+    "name": "Linda Martinez",
+    "address": "707 Oak St, Countryside, MI",
+    "email": "lindamartinez@example.com",
+    "phoneNumber": "555-789-0123"
 }
 
 ###
@@ -27,4 +27,4 @@ PATCH http://localhost:8080/user/2 HTTP/1.1
 
 ###
 
-DELETE http://localhost:8080/user/7 HTTP/1.1
+DELETE http://localhost:8080/user/10 HTTP/1.1
