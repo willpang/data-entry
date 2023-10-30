@@ -34,9 +34,15 @@
                         <td>{{ .Email }}</td>
                         <td>{{ .PhoneNumber }}</td>
                         <td>
-                            <button type="button" class="btn btn-primary " onclick=""><img src="/assets/images/loupe.png" width="20" height="20" style="filter: invert(100%);" /></button>
-                            <button type="button" class="btn btn-success btn-80-bright" onclick=""><img src="/assets/images/edit.png" width="20" height="20" style="filter: invert(100%);" /></button>
-                            <button type="button" class="btn btn-danger btn-80-bright" onclick="deleteUser({{ .ID }},{{ .Name }})"><img src="/assets/images/recycle-bin.png" width="20" height="20" style="filter: invert(100%);" /></button>
+                            <button type="button" class="btn btn-primary " onclick="">
+                                <img src="/assets/images/loupe.png" width="20" height="20" style="filter: invert(100%);" />
+                            </button>
+                            <button type="button" class="btn btn-success btn-80-bright" onclick="window.location.href='/users/update/{{ .ID }}'">
+                                <img src="/assets/images/edit.png" width="20" height="20" style="filter: invert(100%);" />
+                            </button>
+                            <button type="button" class="btn btn-danger btn-80-bright" onclick="deleteUser({{ .ID }},{{ .Name }})">
+                                <img src="/assets/images/recycle-bin.png" width="20" height="20" style="filter: invert(100%);" />
+                            </button>
                         </td>
                     </tr>
                     {{ end }}

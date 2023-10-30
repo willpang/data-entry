@@ -1,0 +1,15 @@
+{{ define "globals/404.tmpl" }}
+<html>
+    {{ template "globals/header.tmpl" .}}
+    <body>
+        {{ template "globals/navbar.tmpl" .}}
+
+        <div class="container">
+            <h1>404 Error: Page Not Found</h1>
+            <p>The page you requested could not be found. Please check the URL and try again.</p>
+        </div>
+
+        {{ template "globals/footer.tmpl" .}}
+    </body>
+</html>
+{{ end }}

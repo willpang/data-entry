@@ -148,14 +148,40 @@ function submitCreateUserForm(event) {
         // Redirect to user list page
         window.location.href = "/users";
       } else {
-        throw new Error("Gagal mendaftarkan pelanggan");
+        throw new Error("Gagal mendaftarkan data pelanggan");
+      }
+    })
+    .catch((error) => console.error(error));
+}
+
+function submitUpdateUserForm(id, event) {
+  event.preventDefault();
+  const form = document.getElementById("update-user-form");
+  const formData = new FormData(form);
+  const userData = Object.fromEntries(formData.entries());
+  const options = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  };
+  fetch("/user/" + id, options)
+    .then((response) => {
+      if (response.ok) {
+        // Display success message
+        alert("Data pelanggan telah sukses diubah!");
+        // Redirect to user list page
+        window.location.href = "/users";
+      } else {
+        throw new Error("Gagal mengubah data pelanggan");
       }
     })
     .catch((error) => console.error(error));
 }
 
 function deleteUser(id, name) {
-  var r = confirm("Apakah anda yakin ingin menghapus pelanggan ini?");
+  var r = confirm("Apakah anda yakin ingin menghapus data pelanggan ini?");
   if (r == true) {
     fetch("/user/" + id, {
       method: "DELETE",
@@ -163,15 +189,21 @@ function deleteUser(id, name) {
       .then((response) => {
         if (response.ok) {
           alert(
-            "Sukses menghapus pelanggan " + name + " dengan id " + id + "..."
+            "Sukses menghapus data pelanggan " +
+              name +
+              " dengan id " +
+              id +
+              "..."
           );
           location.reload(); // Reload the page after the user is deleted
         } else {
-          alert("Gagal menghapus pelanggan " + name + " dengan id " + id + "!");
+          alert(
+            "Gagal menghapus data pelanggan " + name + " dengan id " + id + "!"
+          );
         }
       })
       .catch((error) => {
-        alert("Gagal menghapus pelanggan " + name + ": " + error.message);
+        alert("Gagal menghapus data pelanggan " + name + ": " + error.message);
       });
 
     return true;

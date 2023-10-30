@@ -20,8 +20,24 @@ func (h Handler) LoadUserTemplate(ctx *gin.Context) {
 func (h Handler) LoadUserCreateTemplate(ctx *gin.Context) {
 	ctx.HTML(http.StatusOK, "users/create.tmpl", gin.H{
 		"Page":  "Pelanggan",
-		"Title": "Tambah Pelanggan",
+		"Title": "Tambah Data Pelanggan",
 	})
+}
+
+func (h Handler) LoadUserUpdateTemplate(ctx *gin.Context) {
+	user, err := h.UserDatastore.GetUser(ctx, ctx.Param("id"))
+	if err != nil {
+		ctx.HTML(http.StatusOK, "globals/404.tmpl", gin.H{
+			"Page":  "Beranda",
+			"Title": "404 Not Found",
+		})
+	} else {
+		ctx.HTML(http.StatusOK, "users/update.tmpl", gin.H{
+			"Page":     "Pelanggan",
+			"Title":    "Ubah Data Pelanggan",
+			"UserData": user,
+		})
+	}
 }
 
 // GET /users
