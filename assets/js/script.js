@@ -128,22 +128,50 @@ function searchTable() {
   }
 }
 
+function submitCreateUserForm(event) {
+  event.preventDefault();
+  const form = document.getElementById("create-user-form");
+  const formData = new FormData(form);
+  const userData = Object.fromEntries(formData.entries());
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  };
+  fetch("/user", options)
+    .then((response) => {
+      if (response.ok) {
+        // Display success message
+        alert("Pelanggan telah sukses didaftarkan!");
+        // Redirect to user list page
+        window.location.href = "/users";
+      } else {
+        throw new Error("Gagal mendaftarkan pelanggan");
+      }
+    })
+    .catch((error) => console.error(error));
+}
+
 function deleteUser(id, name) {
-  var r = confirm("Are you sure you want to delete this user?");
+  var r = confirm("Apakah anda yakin ingin menghapus pelanggan ini?");
   if (r == true) {
     fetch("/user/" + id, {
       method: "DELETE",
     })
       .then((response) => {
         if (response.ok) {
-          alert("Successfully deleted user " + name + " with id " + id + "...");
+          alert(
+            "Sukses menghapus pelanggan " + name + " dengan id " + id + "..."
+          );
           location.reload(); // Reload the page after the user is deleted
         } else {
-          alert("Failed to delete user " + name + " with id " + id + "!");
+          alert("Gagal menghapus pelanggan " + name + " dengan id " + id + "!");
         }
       })
       .catch((error) => {
-        alert("Failed to delete user " + name + ": " + error.message);
+        alert("Gagal menghapus pelanggan " + name + ": " + error.message);
       });
 
     return true;

@@ -11,8 +11,16 @@ func (h Handler) LoadUserTemplate(ctx *gin.Context) {
 	users := h.UserDatastore.GetAllUsers(ctx)
 
 	ctx.HTML(http.StatusOK, "users/users.tmpl", gin.H{
+		"Page":     "Pelanggan",
 		"Title":    "Pelanggan",
 		"UserData": users,
+	})
+}
+
+func (h Handler) LoadUserCreateTemplate(ctx *gin.Context) {
+	ctx.HTML(http.StatusOK, "users/create.tmpl", gin.H{
+		"Page":  "Pelanggan",
+		"Title": "Tambah Pelanggan",
 	})
 }
 

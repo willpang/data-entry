@@ -9,15 +9,15 @@
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a href="/"
-                class="nav-link {{ if eq .Title "Beranda" }} active {{ end }}"
-                {{ if eq .Title "Beranda" }} aria-current="page" {{ end }}>
+                class="nav-link {{ if eq .Page "Beranda" }} active {{ end }}"
+                {{ if eq .Page "Beranda" }} aria-current="page" {{ end }}>
                     Beranda
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/users"
-                class="nav-link {{ if eq .Title "Pelanggan" }} active {{ end }}"
-                {{ if eq .Title "Pelanggan" }} aria-current="page" {{ end }}>
+                class="nav-link {{ if eq .Page "Pelanggan" }} active {{ end }}"
+                {{ if eq .Page "Pelanggan" }} aria-current="page" {{ end }}>
                     Pelanggan
                 </a>
             </li>
