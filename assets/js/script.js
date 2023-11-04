@@ -144,11 +144,11 @@ function submitCreateUserForm(event) {
     .then((response) => {
       if (response.ok) {
         // Display success message
-        alert("Pelanggan telah sukses didaftarkan!");
+        alert("User has been successfully registered!");
         // Redirect to user list page
         window.location.href = "/users";
       } else {
-        throw new Error("Gagal mendaftarkan data pelanggan");
+        throw new Error("Failed to register user");
       }
     })
     .catch((error) => console.error(error));
@@ -170,40 +170,32 @@ function submitUpdateUserForm(id, event) {
     .then((response) => {
       if (response.ok) {
         // Display success message
-        alert("Data pelanggan telah sukses diubah!");
+        alert("User has been successfully updated!");
         // Redirect to user list page
         window.location.href = "/users";
       } else {
-        throw new Error("Gagal mengubah data pelanggan");
+        throw new Error("Failed to update user");
       }
     })
     .catch((error) => console.error(error));
 }
 
 function deleteUser(id, name) {
-  var r = confirm("Apakah anda yakin ingin menghapus data pelanggan ini?");
+  var r = confirm("Are you sure you want to delete this user?");
   if (r == true) {
     fetch("/user/" + id, {
       method: "DELETE",
     })
       .then((response) => {
         if (response.ok) {
-          alert(
-            "Sukses menghapus data pelanggan " +
-              name +
-              " dengan id " +
-              id +
-              "..."
-          );
+          alert("Successfully deleted user " + name + " with id " + id + "!");
           location.reload(); // Reload the page after the user is deleted
         } else {
-          alert(
-            "Gagal menghapus data pelanggan " + name + " dengan id " + id + "!"
-          );
+          alert("Failed to delete user " + name + " with id " + id + "!");
         }
       })
       .catch((error) => {
-        alert("Gagal menghapus data pelanggan " + name + ": " + error.message);
+        alert("Failed to delete user " + name + " with id " + id + "!");
       });
 
     return true;

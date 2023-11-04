@@ -5,14 +5,14 @@
         {{ template "globals/navbar.tmpl" .}}
 
         <div class="container">
-            <h2>Ubah Data Pelanggan</h1>
+            <h2>Add New User</h1>
             <form id="create-user-form" onsubmit="submitCreateUserForm(event)">
                 <div class="form-group">
-                    <label for="name">Nama:</label>
+                    <label for="name">Name:</label>
                     <input type="text" class="form-control" id="name" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="address">Alamat:</label>
+                    <label for="address">Address:</label>
                     <input type="text" class="form-control" id="address" name="address" required>
                 </div>
                 <div class="form-group">
@@ -20,11 +20,11 @@
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="phoneNumber">Nomor Telepon:</label>
+                    <label for="phoneNumber">Phone Number:</label>
                     <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" required>
                 </div>
                 <br/>
-                <button type="submit" class="btn btn-primary">Tambah Pelanggan</button>
+                <button type="submit" class="btn btn-primary">Add User</button>
             </form>
         </div>
 
