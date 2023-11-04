@@ -8,7 +8,7 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                 <h1 class="h2">User List</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <button type="button" class="btn btn-primary btn-80-bright" onclick="window.location.href='/users/create'">Add New User</button>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='/users/create'">Add New User</button>
                 </div>
             </div>
 
@@ -34,14 +34,9 @@
                         <td>{{ .Email }}</td>
                         <td>{{ .PhoneNumber }}</td>
                         <td>
-                            <button type="button" class="btn btn-primary " onclick="">
-                                <img src="/assets/images/loupe.png" width="20" height="20" style="filter: invert(100%);" />
-                            </button>
-                            <button type="button" class="btn btn-success btn-80-bright" onclick="window.location.href='/users/update/{{ .ID }}'">
-                                <img src="/assets/images/edit.png" width="20" height="20" style="filter: invert(100%);" />
-                            </button>
-                            <button type="button" class="btn btn-danger btn-80-bright" onclick="deleteUser({{ .ID }},{{ .Name }})">
-                                <img src="/assets/images/recycle-bin.png" width="20" height="20" style="filter: invert(100%);" />
+                            <button type="button" class="btn btn-primary " onclick="window.location.href='/users/detail/{{ .ID }}'">
+                                <img src="/assets/images/loupe.png" width="15" height="15" style="filter: invert(100%);" />
+                                View Detail
                             </button>
                         </td>
                     </tr>

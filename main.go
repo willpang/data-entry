@@ -24,6 +24,7 @@ func main() {
 	r.GET("/", h.LoadIndexTemplate)
 	r.GET("/users", h.LoadUserTemplate)
 	r.GET("/users/create", h.LoadUserCreateTemplate)
+	r.GET("/users/detail/:id", h.LoadUserDetailTemplate)
 	r.GET("/users/update/:id", h.LoadUserUpdateTemplate)
 	r.GET("/user", h.FindUsers)
 	r.POST("/user", h.CreateUser)

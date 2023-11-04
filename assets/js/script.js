@@ -172,7 +172,7 @@ function submitUpdateUserForm(id, event) {
         // Display success message
         alert("User has been successfully updated!");
         // Redirect to user list page
-        window.location.href = "/users";
+        window.location.href = "/users/detail/" + id;
       } else {
         throw new Error("Failed to update user");
       }
@@ -189,7 +189,7 @@ function deleteUser(id, name) {
       .then((response) => {
         if (response.ok) {
           alert("Successfully deleted user " + name + " with id " + id + "!");
-          location.reload(); // Reload the page after the user is deleted
+          window.location.href = "/users";
         } else {
           alert("Failed to delete user " + name + " with id " + id + "!");
         }

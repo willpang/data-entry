@@ -40,6 +40,22 @@ func (h Handler) LoadUserUpdateTemplate(ctx *gin.Context) {
 	}
 }
 
+func (h Handler) LoadUserDetailTemplate(ctx *gin.Context) {
+	user, err := h.UserDatastore.GetUser(ctx, ctx.Param("id"))
+	if err != nil {
+		ctx.HTML(http.StatusOK, "globals/404.tmpl", gin.H{
+			"Page":  "Home",
+			"Title": "404 Not Found",
+		})
+	} else {
+		ctx.HTML(http.StatusOK, "users/detail.tmpl", gin.H{
+			"Page":     "Users",
+			"Title":    "User Detail",
+			"UserData": user,
+		})
+	}
+}
+
 // GET /users
 // Get all users
 func (h Handler) FindUsers(ctx *gin.Context) {

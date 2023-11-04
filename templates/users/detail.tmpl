@@ -1,0 +1,29 @@
+{{ define "users/detail.tmpl" }}
+<html>
+    {{ template "globals/header.tmpl" .}}
+    <body>
+        {{ template "globals/navbar.tmpl" .}}
+
+        <div class="container">
+            <h2>User Detail</h2>
+            <div class="user-details">
+                <p><strong>ID:</strong> {{ .UserData.ID }}</p>
+                <p><strong>Name:</strong> {{ .UserData.Name }}</p>
+                <p><strong>Address:</strong> {{ .UserData.Address }}</p>
+                <p><strong>Email:</strong> {{ .UserData.Email }}</p>
+                <p><strong>Phone Number:</strong> {{ .UserData.PhoneNumber }}</p>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='/users/update/{{ .UserData.ID }}'">
+                <img src="/assets/images/edit.png" width="15" height="15" style="filter: invert(100%);" />
+                Edit User
+            </button>
+            <button type="button" class="btn btn-danger" onclick="deleteUser({{ .UserData.ID }},{{ .UserData.Name }})">
+                <img src="/assets/images/recycle-bin.png" width="15" height="15" style="filter: invert(100%);" />
+                Delete User
+            </button>
+        </div>
+
+        {{ template "globals/footer.tmpl" .}}
+    </body>
+</html>
+{{ end }}
